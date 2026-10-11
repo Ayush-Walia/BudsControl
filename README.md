@@ -22,7 +22,25 @@ It runs in the background with no Dock or menu bar icon. You use it from a Contr
 - OnePlus Buds Pro 3, paired with the Mac. Other OnePlus or OPPO buds may work, but the noise mode bits are only verified on the Buds Pro 3.
 - To build: Xcode 26 and [XcodeGen](https://github.com/yonaskolb/XcodeGen).
 
-## Build
+## Install
+
+Prebuilt releases are for Apple silicon Macs on macOS 26 or newer.
+
+1. Download the latest `BudsControl-<version>-arm64.zip` from [Releases](https://github.com/Ayush-Walia/BudsControl/releases/latest).
+2. Double-click the zip to extract **Buds Control.app**, then move it to your **Applications** folder.
+3. Open it. macOS blocks it the first time because the app is not notarized by Apple. To allow it:
+   - Open **System Settings › Privacy & Security**, scroll to the message about "Buds Control", click **Open Anyway**, and confirm.
+   - Or run this in Terminal once:
+     ```sh
+     xattr -dr com.apple.quarantine "/Applications/Buds Control.app"
+     ```
+4. Allow Bluetooth access when macOS asks. If macOS asks whether Buds Control may access data from other apps, allow it. That is how the Control Center tile reads the app's state.
+5. Add the tile: open Control Center, choose **Edit Controls**, and drag **OnePlus Buds** in. Right-click it in edit mode to pick the wider size, which shows the battery text.
+6. Optional: open the panel and tick **Start Buds Control at login**.
+
+Nothing appears in the Dock or menu bar. That is expected. Use the tile or ⌥⌘B.
+
+## Build from source
 
 1. Install XcodeGen:
    ```sh
