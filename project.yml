@@ -1,0 +1,61 @@
+name: BudsControl
+options:
+  bundleIdPrefix: com.ayushwalia
+  deploymentTarget:
+    macOS: "26.0"
+settings:
+  base:
+    DEVELOPMENT_TEAM: 7V2FXK5C22
+    CODE_SIGN_STYLE: Automatic
+    SWIFT_VERSION: "5.0"
+    MACOSX_DEPLOYMENT_TARGET: "26.0"
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+targets:
+  BudsControl:
+    type: application
+    platform: macOS
+    sources: [App, Shared]
+    dependencies:
+      - target: BudsControlWidget
+        embed: true
+    info:
+      path: App/Info.plist
+      properties:
+        CFBundleDisplayName: Buds Control
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        LSUIElement: true
+        LSApplicationCategoryType: public.app-category.utilities
+        NSBluetoothAlwaysUsageDescription: Buds Control talks to your OnePlus Buds to read battery and switch noise control modes.
+        CFBundleURLTypes:
+          - CFBundleURLName: com.ayushwalia.budscontrol
+            CFBundleURLSchemes: [budscontrol]
+    entitlements:
+      path: App/BudsControl.entitlements
+      properties:
+        com.apple.security.application-groups: [7V2FXK5C22.com.ayushwalia.budscontrol]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.ayushwalia.budscontrol
+        PRODUCT_NAME: Buds Control
+  BudsControlWidget:
+    type: app-extension
+    platform: macOS
+    sources: [Widget, Shared]
+    info:
+      path: Widget/Info.plist
+      properties:
+        CFBundleDisplayName: Buds Control
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    entitlements:
+      path: Widget/BudsControlWidget.entitlements
+      properties:
+        com.apple.security.app-sandbox: true
+        com.apple.security.application-groups: [7V2FXK5C22.com.ayushwalia.budscontrol]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.ayushwalia.budscontrol.widget
